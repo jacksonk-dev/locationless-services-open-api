@@ -10,7 +10,8 @@ func main() {
 	router := gin.Default()
 	const appPort string = ":8082"
 
-	router.GET("/api", pets.Get)
+	router.GET("/api/pets", pets.GetPets)
+	router.POST("/api/pets", pets.AddPet)
 
 	router.Run(appPort)
 }

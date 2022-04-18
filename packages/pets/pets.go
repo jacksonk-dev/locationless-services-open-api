@@ -6,8 +6,27 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Get(ginContext *gin.Context) {
-	ginContext.JSON(http.StatusOK, gin.H{
-		"message": "Hello",
-	})
+type Pet struct {
+	PetType     string `json:"type"`
+	Description string `json:"description"`
+}
+
+var pets = []Pet{
+	{PetType: "dog", Description: "The best dog"},
+	{PetType: "cat", Description: "A fuckin' cat"},
+}
+
+func GetPets(ginContext *gin.Context) {
+	ginContext.IndentedJSON(http.StatusOK, pets)
+}
+
+func AddPet(ginContext *gin.Context) {
+	var newPet Pet
+
+	if err := ginContext.BindJSON(&newPet); err != nil {
+		return
+	}
+
+	pets = append(pets, newPet)
+	ginContext.IndentedJSON(http.StatusCreated, newPet)
 }
