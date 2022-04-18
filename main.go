@@ -1,7 +1,7 @@
 package main
 
 import (
-	"petsAndAnimalsBE/packages/pets"
+	"locationless-services/packages/services"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,8 +10,8 @@ func main() {
 	router := gin.Default()
 	const appPort string = ":8082"
 
-	router.GET("/api/pets", pets.GetPets)
-	router.POST("/api/pets", pets.AddPet)
+	router.GET("/services", services.GetServices)
+	router.POST("/services", services.AddService)
 
 	router.Run(appPort)
 }
